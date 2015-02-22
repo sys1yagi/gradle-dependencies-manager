@@ -21,7 +21,7 @@ func Generate() {
     compile 'com.android.support:appcompat-v7:21.0.3'
 }
 `
-	err := ioutil.WriteFile(file, []byte(data), 0x0755)
+	err := ioutil.WriteFile(file, []byte(data), 0755)
 	if err != nil {
 		panic(err)
 	}
