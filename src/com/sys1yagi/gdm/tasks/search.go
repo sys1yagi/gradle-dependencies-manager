@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strconv"
-	"strings"
 )
 
 //Doc aaa
@@ -36,7 +34,7 @@ type SearchResult struct {
 }
 
 //Search dependencies.gradle.
-func Search() {
+func Search(printer func(int, Doc)) {
 	query := getArg(2)
 	if query == "" {
 		fmt.Println("query is empty.")
@@ -58,15 +56,6 @@ func Search() {
 		return
 	}
 	for i, doc := range result.Response.Docs {
-		fmt.Println(strconv.Itoa(i) + ".  " + doc.G + ":" + doc.A + ":" + doc.LatestVersion)
-
-		fmt.Print("  ")
-		for j := range doc.Text {
-			text := doc.Text[j]
-			if strings.HasPrefix(text, ".") {
-				fmt.Print(text + ", ")
-			}
-		}
-		fmt.Println()
+		printer(i, doc)
 	}
 }
