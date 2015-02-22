@@ -1,0 +1,14 @@
+
+if [ -z "$GDM_HOME" ]; then
+  echo "WARN : GDM_HOME is empty"
+else
+  gdm="$GDM_HOME/bin/gdm"
+fi
+echo $gdm
+dependency=`$gdm installSearch $1 | peco`
+if [[ $dependency =~ ^(.+).* ]] ; then
+  name=${BASH_REMATCH[1]}
+  $gdm install $name $2 $3
+else
+  echo "fail"
+fi
