@@ -7,32 +7,6 @@ import (
 	"net/http"
 )
 
-//Doc aaa
-type Doc struct {
-	ID            string
-	G             string
-	A             string
-	LatestVersion string
-	RepositoryID  string
-	P             string
-	Timestamp     int
-	VersionCount  int
-	Text          []string
-	Ex            []string
-}
-
-//Response aaa
-type Response struct {
-	NumFound int
-	Start    int
-	Docs     []Doc
-}
-
-//SearchResult aaa
-type SearchResult struct {
-	Response Response
-}
-
 //Search dependencies.gradle.
 func Search(printer func(int, Doc)) {
 	query := getArg(2)
@@ -53,7 +27,6 @@ func Search(printer func(int, Doc)) {
 	err := json.Unmarshal(byteArray, &result)
 	if err != nil {
 		panic(err)
-		return
 	}
 	for i, doc := range result.Response.Docs {
 		printer(i, doc)

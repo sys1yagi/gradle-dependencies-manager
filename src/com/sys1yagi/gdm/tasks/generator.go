@@ -10,7 +10,7 @@ func Generate() {
 	target := getArg(2)
 	file := "dependencies.gradle"
 	if target != "" {
-		file = "${target}/${file}"
+		file = target + "/" + file
 	}
 	if Exists(file) {
 		fmt.Println("already exists. " + file)
